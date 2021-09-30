@@ -1,0 +1,31 @@
+{
+  "name": "human-match",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vladmandic/human-match.git"
+  },
+  "author": "Vladimir Mandic <mandic00@live.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vladmandic/human-match/issues"
+  },
+  "homepage": "https://github.com/vladmandic/human-match#readme",
+  "dependencies": {
+    "@types/node": "^16.10.2",
+    "@typescript-eslint/eslint-plugin": "^4.32.0",
+    "@typescript-eslint/parser": "^4.32.0",
+    "@vladmandic/pilogger": "^0.3.3",
+    "as-bind": "^0.8.2",
+    "assemblyscript": "^0.19.16",
+    "esbuild": "^0.13.3",
+    "eslint": "^7.32.0",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.4.3"
+  }
+}
