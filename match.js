@@ -123,8 +123,8 @@ async function main() {
   [index, best] = wasm.exports.match(reduce(embedding));
   log.timed(t0, 'match', { type: 'pure wasm  ' }, { index, name: labels[index], similarity: Math.round(1000 * similarity) / 10, distance: best });
 
-        // const reshape = desc.reshape([128, 8]); // reshape large 1024-element descriptor to 128 x 8
-      // const reduce = reshape.logSumExp(1); // reduce 2nd dimension by calculating logSumExp on it which leaves us with 128-element descriptor
+  // const reshape = desc.reshape([128, 8]); // reshape large 1024-element descriptor to 128 x 8
+  // const reduce = reshape.logSumExp(1); // reduce 2nd dimension by calculating logSumExp on it which leaves us with 128-element descriptor
 
 }
 
