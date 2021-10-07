@@ -4,12 +4,12 @@ let debug = false;
 
 /**@type SharedArrayBuffer */
 let buffer;
-/**@type Float64Array */
+/**@type Float32Array */
 let view;
 let threshold = 0;
 let records = 0;
 
-const descLength =  8 * 1024; // descriptor length in bytes: 8-bytes per f64 element with 1024-elements 
+const descLength =  1024; // descriptor length in bytes
 
 function distance(descriptor1, index, options = { order: 2 }) {
   let sum = 0;
@@ -45,7 +45,7 @@ threads.parentPort?.on('message', (msg) => {
   }
   if (msg instanceof SharedArrayBuffer) { // called only once to receive reference to shared array buffer
     buffer = msg;
-    view = new Float64Array(buffer); // initialize f64 view into buffer
+    view = new Float32Array(buffer); // initialize f64 view into buffer
     if (debug) threads.parentPort?.postMessage(`buffer: ${buffer?.byteLength}`);
   }
   if (typeof msg.records !== 'undefined') { // recived every time when number of records changes

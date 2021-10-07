@@ -4,11 +4,11 @@ const threads = require('worker_threads');
 
 const options = {
   dbFile: 'data/db.json', // sample face db
-  dbFact: 1100, // load db n times to fake huge size
-  dbMax: 1000000, // maximum number of records to hold in memory
-  threadPoolSize: 6,
+  dbFact: 222, // load db n times to fake huge size
+  dbMax: 10000, // maximum number of records to hold in memory
+  threadPoolSize: 12,
   workerSrc: './multithread/worker.js',
-  maxJobs: 50, // exit after processing this many jobs
+  maxJobs: 1000, // exit after processing this many jobs
   debug: false, // verbose messages
   minThreshold: 0.9, // match returns first record that meets the similarity threshold, set to 0 to always scan all records
 }
@@ -18,14 +18,14 @@ const data = {
   labels: [], // array of strings, length of array serves as overal number of records so has to be maintained carefully
   /**@type SharedArrayBuffer | null */
   buffer: null,
-  /**@type Float64Array | null */
+  /**@type Float32Array | null */
   view: null,
   /**@type threads.Worker[] */
   workers: [], // holds instance of workers. worker can be null if exited
   requestID: 0, // each request should increment this counter as its used for round robin assignment
 }
 
-const descLength =  8 * 1024; // descriptor length in bytes: 8-bytes per f64 element with 1024-elements 
+const descLength =  1024; // descriptor length in bytes
 let t0 = process.hrtime.bigint(); // used for perf counters
 
 const appendRecords = (labels, descriptors) => {
@@ -103,7 +103,7 @@ async function workersStart(numWorkers) {
 
 const workerMessage = (index, msg) => {
   if (msg.request) {
-    log.data('message:', { worker: index, request: msg.request, time: msg.time, label: getLabel(msg.index), similarity: msg.similarity });
+    // log.data('message:', { worker: index, request: msg.request, time: msg.time, label: getLabel(msg.index), similarity: msg.similarity });
     if (msg.request >= options.maxJobs) {
       log.timed(t0, `received ${options.maxJobs} results`);
       workersClose();
@@ -135,11 +135,12 @@ async function main() {
   log.header();
   log.info('options:', options);
 
-  data.buffer = new SharedArrayBuffer(options.dbMax * descLength) // preallocate max number of records as sharedarraybuffers cannot grow
-  data.view = new Float64Array(data.buffer), // view into buffer
+  data.buffer = new SharedArrayBuffer(4 * options.dbMax * descLength) // preallocate max number of records as sharedarraybuffers cannot grow
+  data.view = new Float32Array(data.buffer), // view into buffer
   data.labels.length = 0;
-  log.state('buffer:', { bytes: data.buffer.byteLength });
+  log.state('buffer:', { bytes: data.buffer.byteLength, elements: data.view?.length });
 
+  /*
   // first pass: load first half of database and start just half of workers and submit half of total jobs
   await loadDB(options.dbFact / 2)
   await workersStart(options.threadPoolSize / 2);
@@ -171,6 +172,25 @@ async function main() {
     if (options.debug) log.info('submited fuzzed job'); // we already know what we're searching for so we can compare results
   }
   log.state('submitted:', { jobs: options.maxJobs / 2, workers: data.workers.filter((worker) => !!worker).length });
+  */
+
+  await loadDB(options.dbFact)
+  await workersStart(options.threadPoolSize);
+  const fuzzed = [];
+  const t1 = performance.now();
+  for (let i = 0; i < options.maxJobs; i++) {
+    const idx = Math.trunc(data.labels.length * Math.random()) // grab a random descriptor index that we'll search for
+    const descriptor = getDescriptor(idx);
+    fuzzed.push(fuzDescriptor(descriptor));
+  }
+  log.timed(t1, 'fuzzed descriptors:', { fuzzed: fuzzed.length });
+
+  for (let i = 0; i < options.maxJobs; i++) {
+    data.requestID++;
+    match(fuzzed[i]);
+    if (options.debug) log.info('submited fuzzed job'); // we already know what we're searching for so we can compare results
+  }
+  log.state('submitted:', { jobs: options.maxJobs, workers: data.workers.filter((worker) => !!worker).length });
 
 }
 
