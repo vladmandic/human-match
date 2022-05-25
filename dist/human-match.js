@@ -125,13 +125,13 @@ function asmFunc(env) {
  var i64toi32_i32$HIGH_BITS = 0;
  function $lib_rt_itcms_visitRoots() {
   var $0 = 0, $1 = 0;
-  $lib_rt_itcms___visit(1088);
-  $lib_rt_itcms___visit(1376);
-  $lib_rt_itcms___visit(1584);
-  $lib_rt_itcms___visit(2208);
-  $lib_rt_itcms___visit(1184);
-  $lib_rt_itcms___visit(2336);
-  $lib_rt_itcms___visit(2400);
+  byn_split_outlined_A$_lib_rt_itcms___visit(1088);
+  byn_split_outlined_A$_lib_rt_itcms___visit(1376);
+  byn_split_outlined_A$_lib_rt_itcms___visit(1584);
+  byn_split_outlined_A$_lib_rt_itcms___visit(2208);
+  byn_split_outlined_A$_lib_rt_itcms___visit(1184);
+  byn_split_outlined_A$_lib_rt_itcms___visit(2336);
+  byn_split_outlined_A$_lib_rt_itcms___visit(2400);
   $1 = $lib_rt_itcms_pinSpace;
   $0 = HEAP32[($1 + 4 | 0) >> 2] & -4 | 0;
   while_continue_0 : while (1) {
@@ -181,35 +181,19 @@ function asmFunc(env) {
   $2 = $lib_rt_itcms_toSpace;
   $1 = HEAP32[($0 + 12 | 0) >> 2];
   if ($1 >>> 0 <= 1 >>> 0) {
-   $1 = 1
+   $3 = 1
   } else {
    if ($1 >>> 0 > HEAP32[2448 >> 2] >>> 0) {
     $lib_builtins_abort(1376 | 0, 1440 | 0, 22 | 0, 28 | 0);
     abort();
    }
-   $1 = HEAP32[(($1 << 3 | 0) + 2452 | 0) >> 2] & 32 | 0;
-  }
-  if ($1) {
-   $3 = !$lib_rt_itcms_white
-  } else {
-   $3 = 2
+   $3 = HEAP32[(($1 << 3 | 0) + 2452 | 0) >> 2] & 32 | 0;
   }
   $1 = HEAP32[($2 + 8 | 0) >> 2];
-  HEAP32[($0 + 4 | 0) >> 2] = $2 | $3 | 0;
+  HEAP32[($0 + 4 | 0) >> 2] = ($3 ? !$lib_rt_itcms_white : 2) | $2 | 0;
   HEAP32[($0 + 8 | 0) >> 2] = $1;
   HEAP32[($1 + 4 | 0) >> 2] = $0 | (HEAP32[($1 + 4 | 0) >> 2] & 3 | 0) | 0;
   HEAP32[($2 + 8 | 0) >> 2] = $0;
- }
- 
- function $lib_rt_itcms___visit($0) {
-  if (!$0) {
-   return
-  }
-  $0 = $0 - 20 | 0;
-  if (($lib_rt_itcms_white | 0) == (HEAP32[($0 + 4 | 0) >> 2] & 3 | 0 | 0)) {
-   $lib_rt_itcms_Object_makeGray($0);
-   $lib_rt_itcms_visitCount = $lib_rt_itcms_visitCount + 1 | 0;
-  }
  }
  
  function $lib_rt_tlsf_removeBlock($0, $1) {
@@ -228,38 +212,38 @@ function asmFunc(env) {
    $2 = $2 >>> 4 | 0
   } else {
    $2 = $2 >>> 0 < 1073741820 >>> 0 ? $2 : 1073741820;
-   $4 = 31 - Math_clz32($2) | 0;
-   $2 = ($2 >>> ($4 - 4 | 0) | 0) ^ 16 | 0;
-   $4 = $4 - 7 | 0;
+   $3 = 31 - Math_clz32($2) | 0;
+   $5 = $3 - 7 | 0;
+   $2 = ($2 >>> ($3 - 4 | 0) | 0) ^ 16 | 0;
   }
-  if (!($4 >>> 0 < 23 >>> 0 ? $2 >>> 0 < 16 >>> 0 : 0)) {
+  if (!($2 >>> 0 < 16 >>> 0 & $5 >>> 0 < 23 >>> 0 | 0)) {
    $lib_builtins_abort(0 | 0, 1520 | 0, 284 | 0, 14 | 0);
    abort();
   }
   $3 = HEAP32[($1 + 8 | 0) >> 2];
-  $5 = HEAP32[($1 + 4 | 0) >> 2];
-  if ($5) {
-   HEAP32[($5 + 8 | 0) >> 2] = $3
+  $4 = HEAP32[($1 + 4 | 0) >> 2];
+  if ($4) {
+   HEAP32[($4 + 8 | 0) >> 2] = $3
   }
   if ($3) {
-   HEAP32[($3 + 4 | 0) >> 2] = $5
+   HEAP32[($3 + 4 | 0) >> 2] = $4
   }
-  if (($1 | 0) == (HEAP32[(($0 + ((($4 << 4 | 0) + $2 | 0) << 2 | 0) | 0) + 96 | 0) >> 2] | 0)) {
-   HEAP32[(($0 + ((($4 << 4 | 0) + $2 | 0) << 2 | 0) | 0) + 96 | 0) >> 2] = $3;
+  if (($1 | 0) == (HEAP32[(($0 + ((($5 << 4 | 0) + $2 | 0) << 2 | 0) | 0) + 96 | 0) >> 2] | 0)) {
+   HEAP32[(($0 + ((($5 << 4 | 0) + $2 | 0) << 2 | 0) | 0) + 96 | 0) >> 2] = $3;
    if (!$3) {
-    $3 = $0 + ($4 << 2 | 0) | 0;
+    $3 = $0 + ($5 << 2 | 0) | 0;
     $1 = $2 & 31 | 0;
-    $5 = ((-1 >>> $1 | 0) & -2 | 0) << $1 | 0;
+    $4 = ((-1 >>> $1 | 0) & -2 | 0) << $1 | 0;
     $1 = (0 - $2 | 0) & 31 | 0;
-    $1 = HEAP32[($3 + 4 | 0) >> 2] & ($5 | (((-1 << $1 | 0) & -2 | 0) >>> $1 | 0) | 0) | 0;
+    $1 = HEAP32[($3 + 4 | 0) >> 2] & ($4 | (((-1 << $1 | 0) & -2 | 0) >>> $1 | 0) | 0) | 0;
     HEAP32[($3 + 4 | 0) >> 2] = $1;
     if (!$1) {
      $1 = $0;
-     $2 = HEAP32[$0 >> 2];
-     $0 = $4 & 31 | 0;
-     $3 = ((-1 >>> $0 | 0) & -2 | 0) << $0 | 0;
-     $0 = (0 - $4 | 0) & 31 | 0;
-     HEAP32[$1 >> 2] = $2 & ($3 | (((-1 << $0 | 0) & -2 | 0) >>> $0 | 0) | 0) | 0;
+     $4 = HEAP32[$0 >> 2];
+     $0 = $5 & 31 | 0;
+     $2 = ((-1 >>> $0 | 0) & -2 | 0) << $0 | 0;
+     $0 = (0 - $5 | 0) & 31 | 0;
+     HEAP32[$1 >> 2] = $4 & ($2 | (((-1 << $0 | 0) & -2 | 0) >>> $0 | 0) | 0) | 0;
     }
    }
   }
@@ -315,7 +299,7 @@ function asmFunc(env) {
    $4 = $3 - 7 | 0;
    $2 = ($2 >>> ($3 - 4 | 0) | 0) ^ 16 | 0;
   }
-  if (!($4 >>> 0 < 23 >>> 0 ? $2 >>> 0 < 16 >>> 0 : 0)) {
+  if (!($2 >>> 0 < 16 >>> 0 & $4 >>> 0 < 23 >>> 0 | 0)) {
    $lib_builtins_abort(0 | 0, 1520 | 0, 251 | 0, 14 | 0);
    abort();
   }
@@ -338,15 +322,14 @@ function asmFunc(env) {
    abort();
   }
   $1 = (($1 + 19 | 0) & -16 | 0) - 4 | 0;
-  $3 = $2 & -16 | 0;
-  $2 = HEAP32[($0 + 1568 | 0) >> 2];
-  if ($2) {
-   if (($2 + 4 | 0) >>> 0 > $1 >>> 0) {
+  $3 = HEAP32[($0 + 1568 | 0) >> 2];
+  if ($3) {
+   if (($3 + 4 | 0) >>> 0 > $1 >>> 0) {
     $lib_builtins_abort(0 | 0, 1520 | 0, 384 | 0, 16 | 0);
     abort();
    }
-   if (($1 - 16 | 0 | 0) == ($2 | 0)) {
-    $4 = HEAP32[$2 >> 2];
+   if (($1 - 16 | 0 | 0) == ($3 | 0)) {
+    $4 = HEAP32[$3 >> 2];
     $1 = $1 - 16 | 0;
    }
   } else {
@@ -355,7 +338,7 @@ function asmFunc(env) {
     abort();
    }
   }
-  $2 = $3 - $1 | 0;
+  $2 = ($2 & -16 | 0) - $1 | 0;
   if ($2 >>> 0 < 20 >>> 0) {
    return
   }
@@ -372,7 +355,7 @@ function asmFunc(env) {
  function $lib_rt_tlsf_initialize() {
   var $0 = 0, $1 = 0;
   $0 = __wasm_memory_size();
-  if (($0 | 0) < (1 | 0)) {
+  if (($0 | 0) <= (0 | 0)) {
    $0 = (__wasm_memory_grow(1 - $0 | 0 | 0) | 0) < (0 | 0)
   } else {
    $0 = 0
@@ -405,107 +388,107 @@ function asmFunc(env) {
  
  function $lib_rt_itcms_step() {
   var $0 = 0, $1 = 0, $2 = 0;
-  folding_inner0 : {
-   break_0 : {
-    switch ($lib_rt_itcms_state | 0) {
-    case 0:
-     $lib_rt_itcms_state = 1;
-     $lib_rt_itcms_visitCount = 0;
-     $lib_rt_itcms_visitRoots();
-     $lib_rt_itcms_iter = $lib_rt_itcms_toSpace;
-     break folding_inner0;
-    case 1:
-     $1 = !$lib_rt_itcms_white;
+  break_0 : {
+   switch ($lib_rt_itcms_state | 0) {
+   case 0:
+    $lib_rt_itcms_state = 1;
+    $lib_rt_itcms_visitCount = 0;
+    $lib_rt_itcms_visitRoots();
+    $lib_rt_itcms_iter = $lib_rt_itcms_toSpace;
+    return $lib_rt_itcms_visitCount;
+   case 1:
+    $1 = !$lib_rt_itcms_white;
+    $0 = HEAP32[($lib_rt_itcms_iter + 4 | 0) >> 2] & -4 | 0;
+    while_continue_1 : while (1) {
+     if (($0 | 0) != ($lib_rt_itcms_toSpace | 0)) {
+      $lib_rt_itcms_iter = $0;
+      if (($1 | 0) != (HEAP32[($0 + 4 | 0) >> 2] & 3 | 0 | 0)) {
+       HEAP32[($0 + 4 | 0) >> 2] = HEAP32[($0 + 4 | 0) >> 2] & -4 | 0 | $1 | 0;
+       $lib_rt_itcms_visitCount = 0;
+       $lib_rt___visit_members($0 + 20 | 0);
+       return $lib_rt_itcms_visitCount;
+      }
+      $0 = HEAP32[($0 + 4 | 0) >> 2] & -4 | 0;
+      continue while_continue_1;
+     }
+     break while_continue_1;
+    };
+    $lib_rt_itcms_visitCount = 0;
+    $lib_rt_itcms_visitRoots();
+    if (($lib_rt_itcms_toSpace | 0) == (HEAP32[($lib_rt_itcms_iter + 4 | 0) >> 2] & -4 | 0 | 0)) {
+     $0 = $lib_memory___stack_pointer;
+     while_continue_0 : while (1) {
+      if ($0 >>> 0 < 18884 >>> 0) {
+       $2 = HEAP32[$0 >> 2];
+       if ($2) {
+        byn_split_outlined_A$_lib_rt_itcms___visit($2)
+       }
+       $0 = $0 + 4 | 0;
+       continue while_continue_0;
+      }
+      break while_continue_0;
+     };
      $0 = HEAP32[($lib_rt_itcms_iter + 4 | 0) >> 2] & -4 | 0;
-     while_continue_1 : while (1) {
+     while_continue_2 : while (1) {
       if (($0 | 0) != ($lib_rt_itcms_toSpace | 0)) {
-       $lib_rt_itcms_iter = $0;
        if (($1 | 0) != (HEAP32[($0 + 4 | 0) >> 2] & 3 | 0 | 0)) {
         HEAP32[($0 + 4 | 0) >> 2] = HEAP32[($0 + 4 | 0) >> 2] & -4 | 0 | $1 | 0;
-        $lib_rt_itcms_visitCount = 0;
         $lib_rt___visit_members($0 + 20 | 0);
-        break folding_inner0;
        }
        $0 = HEAP32[($0 + 4 | 0) >> 2] & -4 | 0;
-       continue while_continue_1;
+       continue while_continue_2;
       }
-      break while_continue_1;
+      break while_continue_2;
      };
-     $lib_rt_itcms_visitCount = 0;
-     $lib_rt_itcms_visitRoots();
-     if (($lib_rt_itcms_toSpace | 0) == (HEAP32[($lib_rt_itcms_iter + 4 | 0) >> 2] & -4 | 0 | 0)) {
-      $0 = $lib_memory___stack_pointer;
-      while_continue_0 : while (1) {
-       if ($0 >>> 0 < 18884 >>> 0) {
-        $lib_rt_itcms___visit(HEAP32[$0 >> 2]);
-        $0 = $0 + 4 | 0;
-        continue while_continue_0;
-       }
-       break while_continue_0;
-      };
-      $0 = HEAP32[($lib_rt_itcms_iter + 4 | 0) >> 2] & -4 | 0;
-      while_continue_2 : while (1) {
-       if (($0 | 0) != ($lib_rt_itcms_toSpace | 0)) {
-        if (($1 | 0) != (HEAP32[($0 + 4 | 0) >> 2] & 3 | 0 | 0)) {
-         HEAP32[($0 + 4 | 0) >> 2] = HEAP32[($0 + 4 | 0) >> 2] & -4 | 0 | $1 | 0;
-         $lib_rt___visit_members($0 + 20 | 0);
-        }
-        $0 = HEAP32[($0 + 4 | 0) >> 2] & -4 | 0;
-        continue while_continue_2;
-       }
-       break while_continue_2;
-      };
-      $0 = $lib_rt_itcms_fromSpace;
-      $lib_rt_itcms_fromSpace = $lib_rt_itcms_toSpace;
-      $lib_rt_itcms_toSpace = $0;
-      $lib_rt_itcms_white = $1;
-      $lib_rt_itcms_iter = HEAP32[($0 + 4 | 0) >> 2] & -4 | 0;
-      $lib_rt_itcms_state = 2;
+     $0 = $lib_rt_itcms_fromSpace;
+     $lib_rt_itcms_fromSpace = $lib_rt_itcms_toSpace;
+     $lib_rt_itcms_toSpace = $0;
+     $lib_rt_itcms_white = $1;
+     $lib_rt_itcms_iter = HEAP32[($0 + 4 | 0) >> 2] & -4 | 0;
+     $lib_rt_itcms_state = 2;
+    }
+    return $lib_rt_itcms_visitCount;
+   case 2:
+    $0 = $lib_rt_itcms_iter;
+    if (($0 | 0) != ($lib_rt_itcms_toSpace | 0)) {
+     $1 = HEAP32[($0 + 4 | 0) >> 2];
+     $lib_rt_itcms_iter = $1 & -4 | 0;
+     if ((!$lib_rt_itcms_white | 0) != ($1 & 3 | 0 | 0)) {
+      $lib_builtins_abort(0 | 0, 1248 | 0, 228 | 0, 20 | 0);
+      abort();
      }
-     break folding_inner0;
-    case 2:
-     $0 = $lib_rt_itcms_iter;
-     if (($0 | 0) != ($lib_rt_itcms_toSpace | 0)) {
-      $1 = HEAP32[($0 + 4 | 0) >> 2];
-      $lib_rt_itcms_iter = $1 & -4 | 0;
-      if ((!$lib_rt_itcms_white | 0) != ($1 & 3 | 0 | 0)) {
-       $lib_builtins_abort(0 | 0, 1248 | 0, 228 | 0, 20 | 0);
-       abort();
-      }
-      if ($0 >>> 0 < 18884 >>> 0) {
-       HEAP32[($0 + 4 | 0) >> 2] = 0;
-       HEAP32[($0 + 8 | 0) >> 2] = 0;
-      } else {
-       $lib_rt_itcms_total = $lib_rt_itcms_total - ((HEAP32[$0 >> 2] & -4 | 0) + 4 | 0) | 0;
-       $1 = $0 + 4 | 0;
-       if ($1 >>> 0 >= 18884 >>> 0) {
-        if (!$lib_rt_tlsf_ROOT) {
-         $lib_rt_tlsf_initialize()
-        }
-        $2 = $lib_rt_tlsf_ROOT;
-        $0 = $1 - 4 | 0;
-        if (($1 ? $1 & 15 | 0 : 1) ? 1 : HEAP32[$0 >> 2] & 1 | 0) {
-         $lib_builtins_abort(0 | 0, 1520 | 0, 559 | 0, 3 | 0);
-         abort();
-        }
-        HEAP32[$0 >> 2] = HEAP32[$0 >> 2] | 1 | 0;
-        $lib_rt_tlsf_insertBlock($2, $0);
+     if ($0 >>> 0 < 18884 >>> 0) {
+      HEAP32[($0 + 4 | 0) >> 2] = 0;
+      HEAP32[($0 + 8 | 0) >> 2] = 0;
+     } else {
+      $lib_rt_itcms_total = $lib_rt_itcms_total - ((HEAP32[$0 >> 2] & -4 | 0) + 4 | 0) | 0;
+      $1 = $0 + 4 | 0;
+      if ($1 >>> 0 >= 18884 >>> 0) {
+       if (!$lib_rt_tlsf_ROOT) {
+        $lib_rt_tlsf_initialize()
        }
+       $2 = $lib_rt_tlsf_ROOT;
+       $0 = $1 - 4 | 0;
+       if (($1 ? $1 & 15 | 0 : 1) ? 1 : HEAP32[$0 >> 2] & 1 | 0) {
+        $lib_builtins_abort(0 | 0, 1520 | 0, 559 | 0, 3 | 0);
+        abort();
+       }
+       HEAP32[$0 >> 2] = HEAP32[$0 >> 2] | 1 | 0;
+       $lib_rt_tlsf_insertBlock($2, $0);
       }
-      return 10;
      }
-     $0 = $lib_rt_itcms_toSpace;
-     HEAP32[($0 + 4 | 0) >> 2] = $0;
-     HEAP32[($0 + 8 | 0) >> 2] = $0;
-     $lib_rt_itcms_state = 0;
-     break;
-    default:
-     break break_0;
-    };
-   }
-   return 0;
+     return 10;
+    }
+    $0 = $lib_rt_itcms_toSpace;
+    HEAP32[($0 + 4 | 0) >> 2] = $0;
+    HEAP32[($0 + 8 | 0) >> 2] = $0;
+    $lib_rt_itcms_state = 0;
+    break;
+   default:
+    break break_0;
+   };
   }
-  return $lib_rt_itcms_visitCount;
+  return 0;
  }
  
  function $lib_rt_tlsf_searchBlock($0, $1) {
@@ -513,27 +496,25 @@ function asmFunc(env) {
   if ($1 >>> 0 < 256 >>> 0) {
    $1 = $1 >>> 4 | 0
   } else {
-   if ($1 >>> 0 < 536870910 >>> 0) {
-    $1 = ($1 + (1 << (27 - Math_clz32($1) | 0) | 0) | 0) - 1 | 0
-   }
-   $2 = 31 - Math_clz32($1) | 0;
-   $1 = ($1 >>> ($2 - 4 | 0) | 0) ^ 16 | 0;
-   $2 = $2 - 7 | 0;
+   $2 = $1 >>> 0 < 536870910 >>> 0 ? ($1 + (1 << (27 - Math_clz32($1) | 0) | 0) | 0) - 1 | 0 : $1;
+   $1 = 31 - Math_clz32($2) | 0;
+   $3 = $1 - 7 | 0;
+   $1 = ($2 >>> ($1 - 4 | 0) | 0) ^ 16 | 0;
   }
-  if (!($2 >>> 0 < 23 >>> 0 ? $1 >>> 0 < 16 >>> 0 : 0)) {
+  if (!($1 >>> 0 < 16 >>> 0 & $3 >>> 0 < 23 >>> 0 | 0)) {
    $lib_builtins_abort(0 | 0, 1520 | 0, 330 | 0, 14 | 0);
    abort();
   }
-  $1 = HEAP32[(($0 + ($2 << 2 | 0) | 0) + 4 | 0) >> 2] & (-1 << $1 | 0) | 0;
+  $1 = HEAP32[(($0 + ($3 << 2 | 0) | 0) + 4 | 0) >> 2] & (-1 << $1 | 0) | 0;
   if ($1) {
    if ($1) {
     $1 = 31 - Math_clz32(($1 - 1 | 0) ^ $1 | 0) | 0
    } else {
     $1 = 32
    }
-   $0 = HEAP32[(($0 + (($1 + ($2 << 4 | 0) | 0) << 2 | 0) | 0) + 96 | 0) >> 2];
+   $0 = HEAP32[(($0 + (($1 + ($3 << 4 | 0) | 0) << 2 | 0) | 0) + 96 | 0) >> 2];
   } else {
-   $1 = HEAP32[$0 >> 2] & (-1 << ($2 + 1 | 0) | 0) | 0;
+   $1 = HEAP32[$0 >> 2] & (-1 << ($3 + 1 | 0) | 0) | 0;
    if ($1) {
     $3 = $0;
     if ($1) {
@@ -575,9 +556,9 @@ function asmFunc(env) {
      if (!$lib_rt_itcms_state) {
       $3 = $lib_rt_itcms_total;
       $2 = Math_imul($3 & 65535 | 0, 200);
-      $5 = Math_imul($3 >>> 16 | 0, 200) + ($2 >>> 16 | 0) | 0;
-      $3 = $5 & 65535 | 0;
-      i64toi32_i32$HIGH_BITS = ($5 >>> 16 | 0) + ($3 >>> 16 | 0) | 0;
+      $4 = Math_imul($3 >>> 16 | 0, 200) + ($2 >>> 16 | 0) | 0;
+      $3 = $4 & 65535 | 0;
+      i64toi32_i32$HIGH_BITS = ($4 >>> 16 | 0) + ($3 >>> 16 | 0) | 0;
       $lib_rt_itcms_threshold = _ZN17compiler_builtins3int4udiv10divmod_u6417h6026910b5ed08e40E($2 & 65535 | 0 | ($3 << 16 | 0) | 0, i64toi32_i32$HIGH_BITS) + 1024 | 0;
       break __inlined_func$_lib_rt_itcms_interrupt;
      }
@@ -590,100 +571,65 @@ function asmFunc(env) {
     $lib_rt_itcms_threshold = $2 + ((($2 - $lib_rt_itcms_threshold | 0) >>> 0 < 1024 >>> 0) << 10 | 0) | 0;
    }
   }
-  $4 = $0 + 16 | 0;
   if (!$lib_rt_tlsf_ROOT) {
    $lib_rt_tlsf_initialize()
   }
-  $5 = $lib_rt_tlsf_ROOT;
-  $2 = $5;
-  if ($4 >>> 0 > 1073741820 >>> 0) {
+  $4 = $lib_rt_tlsf_ROOT;
+  $2 = $0 + 16 | 0;
+  if ($2 >>> 0 > 1073741820 >>> 0) {
    $lib_builtins_abort(1184 | 0, 1520 | 0, 458 | 0, 29 | 0);
    abort();
   }
-  $3 = $2;
-  if ($4 >>> 0 <= 12 >>> 0) {
-   $2 = 12
-  } else {
-   $2 = (($4 + 19 | 0) & -16 | 0) - 4 | 0
-  }
-  $3 = $lib_rt_tlsf_searchBlock($3, $2);
-  if (!$3) {
-   $4 = __wasm_memory_size();
-   $6 = $4;
-   if ($2 >>> 0 < 536870910 >>> 0) {
-    $3 = $2 + ((1 << (27 - Math_clz32($2) | 0) | 0) - 1 | 0) | 0
-   } else {
-    $3 = $2
-   }
-   $3 = ((($3 + (4 << ((HEAP32[($5 + 1568 | 0) >> 2] | 0) != (($4 << 16 | 0) - 4 | 0 | 0)) | 0) | 0) + 65535 | 0) & -65536 | 0) >>> 16 | 0;
-   if ((__wasm_memory_grow((($3 | 0) < ($4 | 0) ? $6 : $3) | 0) | 0) < (0 | 0)) {
-    if ((__wasm_memory_grow($3 | 0) | 0) < (0 | 0)) {
+  $3 = $2 >>> 0 <= 12 >>> 0 ? 12 : (($2 + 19 | 0) & -16 | 0) - 4 | 0;
+  $2 = $lib_rt_tlsf_searchBlock($4, $3);
+  if (!$2) {
+   $2 = __wasm_memory_size();
+   $5 = ((((4 << ((HEAP32[($4 + 1568 | 0) >> 2] | 0) != (($2 << 16 | 0) - 4 | 0 | 0)) | 0) + ($3 >>> 0 < 536870910 >>> 0 ? $3 + ((1 << (27 - Math_clz32($3) | 0) | 0) - 1 | 0) | 0 : $3) | 0) + 65535 | 0) & -65536 | 0) >>> 16 | 0;
+   if ((__wasm_memory_grow((($2 | 0) > ($5 | 0) ? $2 : $5) | 0) | 0) < (0 | 0)) {
+    if ((__wasm_memory_grow($5 | 0) | 0) < (0 | 0)) {
      abort()
     }
    }
-   $lib_rt_tlsf_addMemory($5, $4 << 16 | 0, __wasm_memory_size() << 16 | 0);
-   $3 = $lib_rt_tlsf_searchBlock($5, $2);
-   if (!$3) {
+   $lib_rt_tlsf_addMemory($4, $2 << 16 | 0, __wasm_memory_size() << 16 | 0);
+   $2 = $lib_rt_tlsf_searchBlock($4, $3);
+   if (!$2) {
     $lib_builtins_abort(0 | 0, 1520 | 0, 496 | 0, 16 | 0);
     abort();
    }
   }
-  if ($2 >>> 0 > (HEAP32[$3 >> 2] & -4 | 0) >>> 0) {
+  if ($3 >>> 0 > (HEAP32[$2 >> 2] & -4 | 0) >>> 0) {
    $lib_builtins_abort(0 | 0, 1520 | 0, 498 | 0, 14 | 0);
    abort();
   }
-  $lib_rt_tlsf_removeBlock($5, $3);
-  $4 = HEAP32[$3 >> 2];
-  if (($2 + 4 | 0) & 15 | 0) {
+  $lib_rt_tlsf_removeBlock($4, $2);
+  $5 = HEAP32[$2 >> 2];
+  if (($3 + 4 | 0) & 15 | 0) {
    $lib_builtins_abort(0 | 0, 1520 | 0, 357 | 0, 14 | 0);
    abort();
   }
-  $6 = ($4 & -4 | 0) - $2 | 0;
+  $6 = ($5 & -4 | 0) - $3 | 0;
   if ($6 >>> 0 >= 16 >>> 0) {
-   HEAP32[$3 >> 2] = $2 | ($4 & 2 | 0) | 0;
-   $2 = ($3 + 4 | 0) + $2 | 0;
-   HEAP32[$2 >> 2] = $6 - 4 | 0 | 1 | 0;
-   $lib_rt_tlsf_insertBlock($5, $2);
+   HEAP32[$2 >> 2] = $3 | ($5 & 2 | 0) | 0;
+   $3 = ($2 + 4 | 0) + $3 | 0;
+   HEAP32[$3 >> 2] = $6 - 4 | 0 | 1 | 0;
+   $lib_rt_tlsf_insertBlock($4, $3);
   } else {
-   HEAP32[$3 >> 2] = $4 & -2 | 0;
-   $2 = ($3 + 4 | 0) + (HEAP32[$3 >> 2] & -4 | 0) | 0;
-   HEAP32[$2 >> 2] = HEAP32[$2 >> 2] & -3 | 0;
+   HEAP32[$2 >> 2] = $5 & -2 | 0;
+   $3 = ($2 + 4 | 0) + (HEAP32[$2 >> 2] & -4 | 0) | 0;
+   HEAP32[$3 >> 2] = HEAP32[$3 >> 2] & -3 | 0;
   }
-  HEAP32[($3 + 12 | 0) >> 2] = $1;
-  HEAP32[($3 + 16 | 0) >> 2] = $0;
-  $2 = $lib_rt_itcms_fromSpace;
-  $1 = HEAP32[($2 + 8 | 0) >> 2];
-  HEAP32[($3 + 4 | 0) >> 2] = $2 | $lib_rt_itcms_white | 0;
-  HEAP32[($3 + 8 | 0) >> 2] = $1;
-  HEAP32[($1 + 4 | 0) >> 2] = $3 | (HEAP32[($1 + 4 | 0) >> 2] & 3 | 0) | 0;
-  HEAP32[($2 + 8 | 0) >> 2] = $3;
-  $lib_rt_itcms_total = $lib_rt_itcms_total + ((HEAP32[$3 >> 2] & -4 | 0) + 4 | 0) | 0;
-  $1 = $3 + 20 | 0;
+  HEAP32[($2 + 12 | 0) >> 2] = $1;
+  HEAP32[($2 + 16 | 0) >> 2] = $0;
+  $3 = $lib_rt_itcms_fromSpace;
+  $1 = HEAP32[($3 + 8 | 0) >> 2];
+  HEAP32[($2 + 4 | 0) >> 2] = $3 | $lib_rt_itcms_white | 0;
+  HEAP32[($2 + 8 | 0) >> 2] = $1;
+  HEAP32[($1 + 4 | 0) >> 2] = $2 | (HEAP32[($1 + 4 | 0) >> 2] & 3 | 0) | 0;
+  HEAP32[($3 + 8 | 0) >> 2] = $2;
+  $lib_rt_itcms_total = $lib_rt_itcms_total + ((HEAP32[$2 >> 2] & -4 | 0) + 4 | 0) | 0;
+  $1 = $2 + 20 | 0;
   wasm2js_memory_fill($1, 0, $0);
   return $1 | 0;
- }
- 
- function $lib_rt_itcms___link($0, $1, $2) {
-  var $3 = 0;
-  if (!$1) {
-   return
-  }
-  if (!$0) {
-   $lib_builtins_abort(0 | 0, 1248 | 0, 294 | 0, 14 | 0);
-   abort();
-  }
-  $1 = $1 - 20 | 0;
-  if (($lib_rt_itcms_white | 0) == (HEAP32[($1 + 4 | 0) >> 2] & 3 | 0 | 0)) {
-   $0 = $0 - 20 | 0;
-   $3 = HEAP32[($0 + 4 | 0) >> 2] & 3 | 0;
-   if (($3 | 0) == (!$lib_rt_itcms_white | 0)) {
-    $lib_rt_itcms_Object_makeGray($2 ? $0 : $1)
-   } else {
-    if (($3 | 0) == (3 | 0) ? ($lib_rt_itcms_state | 0) == (1 | 0) : 0) {
-     $lib_rt_itcms_Object_makeGray($1)
-    }
-   }
-  }
  }
  
  function assembly_human_match_features() {
@@ -691,39 +637,38 @@ function asmFunc(env) {
  }
  
  function $lib_array_ensureCapacity($0, $1) {
-  var $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0;
-  $3 = HEAP32[1096 >> 2];
-  if ($0 >>> 0 > ($3 >>> 2 | 0) >>> 0) {
+  var $2 = 0, $3 = 0;
+  $2 = HEAP32[1096 >> 2];
+  if ($0 >>> 0 > ($2 >>> 2 | 0) >>> 0) {
    if ($0 >>> 0 > 268435455 >>> 0) {
-    $lib_builtins_abort(1584 | 0, 1632 | 0, 18 | 0, 48 | 0);
+    $lib_builtins_abort(1584 | 0, 1632 | 0, 19 | 0, 48 | 0);
     abort();
    }
+   $3 = HEAP32[1088 >> 2];
    $0 = ($0 >>> 0 > 8 >>> 0 ? $0 : 8) << 2 | 0;
    if ($1) {
-    $1 = $3 << 1 | 0;
+    $1 = $2 << 1 | 0;
     $1 = $1 >>> 0 < 1073741820 >>> 0 ? $1 : 1073741820;
     $0 = $0 >>> 0 < $1 >>> 0 ? $1 : $0;
    }
    $1 = $0;
-   $5 = HEAP32[1088 >> 2];
-   $2 = $5;
-   $4 = $2 - 20 | 0;
+   $2 = $3 - 20 | 0;
    __inlined_func$_lib_rt_itcms___renew : {
-    if ($0 >>> 0 <= ((HEAP32[$4 >> 2] & -4 | 0) - 16 | 0) >>> 0) {
-     HEAP32[($4 + 16 | 0) >> 2] = $1;
-     $0 = $2;
+    if ($0 >>> 0 <= ((HEAP32[$2 >> 2] & -4 | 0) - 16 | 0) >>> 0) {
+     HEAP32[($2 + 16 | 0) >> 2] = $1;
+     $0 = $3;
      break __inlined_func$_lib_rt_itcms___renew;
     }
-    $0 = $lib_rt_itcms___new($1, HEAP32[($4 + 12 | 0) >> 2]);
-    $6 = $2;
-    $2 = HEAP32[($4 + 16 | 0) >> 2];
-    wasm2js_memory_copy($0, $6, $1 >>> 0 < $2 >>> 0 ? $1 : $2);
+    $0 = $lib_rt_itcms___new($1, HEAP32[($2 + 12 | 0) >> 2]);
+    $2 = HEAP32[($2 + 16 | 0) >> 2];
+    wasm2js_memory_copy($0, $3, $1 >>> 0 < $2 >>> 0 ? $1 : $2);
    }
-   wasm2js_memory_fill($0 + $3 | 0, 0, $1 - $3 | 0);
-   if (($0 | 0) != ($5 | 0)) {
+   if (($0 | 0) != ($3 | 0)) {
     HEAP32[1088 >> 2] = $0;
     HEAP32[1092 >> 2] = $0;
-    $lib_rt_itcms___link(1088, $0, 0);
+    if ($0) {
+     byn_split_outlined_A$_lib_rt_itcms___link(1088, $0, 0)
+    }
    }
    HEAP32[1096 >> 2] = $1;
   }
@@ -731,7 +676,7 @@ function asmFunc(env) {
  
  function $lib_array_Array_f32____get($0, $1) {
   if ($1 >>> 0 >= HEAP32[($0 + 12 | 0) >> 2] >>> 0) {
-   $lib_builtins_abort(1376 | 0, 1632 | 0, 107 | 0, 42 | 0);
+   $lib_builtins_abort(1376 | 0, 1632 | 0, 114 | 0, 42 | 0);
    abort();
   }
   return HEAPF32[(HEAP32[($0 + 4 | 0) >> 2] + ($1 << 2 | 0) | 0) >> 2];
@@ -757,11 +702,11 @@ function asmFunc(env) {
    }
   }
   $4 = (wasm2js_scratch_store_f32($1), wasm2js_scratch_load_i32(2));
-  $7 = (($4 << 1 | 0) - 1 | 0) >>> 0 >= -16777217 >>> 0;
+  $3 = (($4 << 1 | 0) - 1 | 0) >>> 0 >= -16777217 >>> 0;
   $2 = (wasm2js_scratch_store_f32($0), wasm2js_scratch_load_i32(2));
   $lib_util_math_powf_lut_inlined_0 : {
-   if ($7 | ($2 - 8388608 | 0) >>> 0 >= 2130706432 >>> 0 | 0) {
-    if ($7) {
+   if ($3 | ($2 - 8388608 | 0) >>> 0 >= 2130706432 >>> 0 | 0) {
+    if ($3) {
      $5 = Math_fround(1.0);
      if (!($4 << 1 | 0)) {
       break $lib_util_math_powf_lut_inlined_0
@@ -771,7 +716,7 @@ function asmFunc(env) {
       break $lib_util_math_powf_lut_inlined_0
      }
      $5 = Math_fround($0 + $1);
-     if (($2 << 1 | 0) >>> 0 > -16777216 >>> 0 ? 1 : ($4 << 1 | 0) >>> 0 > -16777216 >>> 0) {
+     if (($4 << 1 | 0) >>> 0 > -16777216 >>> 0 | ($2 << 1 | 0) >>> 0 > -16777216 >>> 0 | 0) {
       break $lib_util_math_powf_lut_inlined_0
      }
      $5 = Math_fround(nan);
@@ -789,35 +734,36 @@ function asmFunc(env) {
      $0 = Math_fround($0 * $0);
      $1 = Math_fround(-$0);
      if ($2 >>> 31 | 0) {
-      $3 = ($4 >>> 23 | 0) & 255 | 0;
-      $2 = 0;
+      $2 = ($4 >>> 23 | 0) & 255 | 0;
+      $3 = 0;
       $lib_util_math_checkintf_inlined_0 : {
-       if ($3 >>> 0 < 127 >>> 0) {
+       if ($2 >>> 0 < 127 >>> 0) {
         break $lib_util_math_checkintf_inlined_0
        }
-       $2 = 2;
-       if ($3 >>> 0 > 150 >>> 0) {
+       $3 = 2;
+       if ($2 >>> 0 > 150 >>> 0) {
         break $lib_util_math_checkintf_inlined_0
        }
-       $3 = 1 << (150 - $3 | 0) | 0;
-       $2 = 0;
-       if ($4 & ($3 - 1 | 0) | 0) {
+       $2 = 1 << (150 - $2 | 0) | 0;
+       $3 = 0;
+       if ($4 & ($2 - 1 | 0) | 0) {
         break $lib_util_math_checkintf_inlined_0
        }
-       $2 = 1;
-       if ($4 & $3 | 0) {
+       $3 = 1;
+       if ($2 & $4 | 0) {
         break $lib_util_math_checkintf_inlined_0
        }
-       $2 = 2;
+       $3 = 2;
       }
-      $3 = ($2 | 0) == (1 | 0);
+      $2 = ($3 | 0) == (1 | 0);
      } else {
-      $3 = 0
+      $2 = 0
      }
-     $0 = $3 ? $1 : $0;
+     $0 = $2 ? $1 : $0;
      $5 = $4 >>> 31 | 0 ? Math_fround(Math_fround(1.0) / $0) : $0;
      break $lib_util_math_powf_lut_inlined_0;
     }
+    $9 = ((wasm2js_scratch_store_f32(Math_fround($0 * Math_fround(8388608.0))), wasm2js_scratch_load_i32(2)) & 2147483647 | 0) - 192937984 | 0;
     if ($2 >>> 31 | 0) {
      $7 = ($4 >>> 23 | 0) & 255 | 0;
      $3 = 0;
@@ -845,31 +791,27 @@ function asmFunc(env) {
       $5 = Math_fround($0 / $0);
       break $lib_util_math_powf_lut_inlined_0;
      }
+     $7 = ($3 | 0) == (1 | 0) ? 65536 : 0;
      $2 = $2 & 2147483647 | 0;
-     $3 = ($3 | 0) == (1 | 0) ? 65536 : 0;
-    } else {
-     $3 = 0
     }
-    if ($2 >>> 0 < 8388608 >>> 0) {
-     $2 = ((wasm2js_scratch_store_f32(Math_fround($0 * Math_fround(8388608.0))), wasm2js_scratch_load_i32(2)) & 2147483647 | 0) - 192937984 | 0
-    }
+    $2 = $2 >>> 0 < 8388608 >>> 0 ? $9 : $2;
    }
    $9 = $2;
-   $2 = $2 - 1060306944 | 0;
-   $4 = $2 & -8388608 | 0;
-   $2 = ((($2 >>> 19 | 0) & 15 | 0) << 4 | 0) + 1664 | 0;
-   $6 = +(wasm2js_scratch_store_i32(2, $9 - $4 | 0), wasm2js_scratch_load_f32()) * HEAPF64[$2 >> 3] - 1.0;
+   $3 = $2 - 1060306944 | 0;
+   $2 = $3 & -8388608 | 0;
+   $3 = ((($3 >>> 19 | 0) & 15 | 0) << 4 | 0) + 1664 | 0;
+   $6 = +(wasm2js_scratch_store_i32(2, $9 - $2 | 0), wasm2js_scratch_load_f32()) * HEAPF64[$3 >> 3] - 1.0;
    $8 = $6 * $6;
-   $6 = +$1 * (($6 * .288457581109214 + -.36092606229713164) * ($8 * $8) + ($6 * 1.4426950408774342 + (HEAPF64[($2 + 8 | 0) >> 3] + +($4 >> 23 | 0 | 0)) + ($6 * .480898481472577 + -.7213474675006291) * $8));
+   $6 = +$1 * (($6 * .288457581109214 + -.36092606229713164) * ($8 * $8) + ($6 * 1.4426950408774342 + (HEAPF64[($3 + 8 | 0) >> 3] + +($2 >> 23 | 0 | 0)) + ($6 * .480898481472577 + -.7213474675006291) * $8));
    wasm2js_scratch_store_f64(+$6);
-   $2 = wasm2js_scratch_load_i32(1 | 0) | 0;
+   $3 = wasm2js_scratch_load_i32(1 | 0) | 0;
    wasm2js_scratch_load_i32(0 | 0) | 0;
-   if ((($2 >>> 15 | 0) & 65535 | 0) >>> 0 >= 32959 >>> 0) {
-    $5 = Math_fround(($3 ? Math_fround(-1584563250285286751870879.0e5) : Math_fround(1584563250285286751870879.0e5)) * Math_fround(1584563250285286751870879.0e5));
+   if ((($3 >>> 15 | 0) & 65535 | 0) >>> 0 >= 32959 >>> 0) {
+    $5 = Math_fround(($7 ? Math_fround(-1584563250285286751870879.0e5) : Math_fround(1584563250285286751870879.0e5)) * Math_fround(1584563250285286751870879.0e5));
     if ($6 > 127.99999995700433) {
      break $lib_util_math_powf_lut_inlined_0
     }
-    $5 = Math_fround(($3 ? Math_fround(-2.524354896707238e-29) : Math_fround(2.524354896707238e-29)) * Math_fround(2.524354896707238e-29));
+    $5 = Math_fround(($7 ? Math_fround(-2.524354896707238e-29) : Math_fround(2.524354896707238e-29)) * Math_fround(2.524354896707238e-29));
     if ($6 <= -150.0) {
      break $lib_util_math_powf_lut_inlined_0
     }
@@ -877,20 +819,20 @@ function asmFunc(env) {
    $8 = $6 + 211106232532992.0;
    wasm2js_scratch_store_f64(+$8);
    wasm2js_scratch_load_i32(1 | 0) | 0;
-   $4 = wasm2js_scratch_load_i32(0 | 0) | 0;
+   $2 = wasm2js_scratch_load_i32(0 | 0) | 0;
    $6 = $6 - ($8 - 211106232532992.0);
    $6 = $6 * .6931471806916203 + 1.0 + ($6 * .05550361559341535 + .2402284522445722) * ($6 * $6);
-   $7 = (($4 & 31 | 0) << 3 | 0) + 1920 | 0;
-   $9 = HEAP32[$7 >> 2];
-   $7 = HEAP32[($7 + 4 | 0) >> 2];
-   $4 = $4 + $3 | 0;
-   $2 = ($4 << 15 | 0) + $7 | 0;
-   $4 = 0;
-   $3 = $4;
-   $4 = $9;
-   $2 = $3 >>> 0 > $4 >>> 0 ? $2 + 1 | 0 : $2;
-   wasm2js_scratch_store_i32(0 | 0, $4 | 0);
-   wasm2js_scratch_store_i32(1 | 0, $2 | 0);
+   $4 = (($2 & 31 | 0) << 3 | 0) + 1920 | 0;
+   $9 = HEAP32[$4 >> 2];
+   $4 = HEAP32[($4 + 4 | 0) >> 2];
+   $2 = $2 + $7 | 0;
+   $3 = ($2 << 15 | 0) + $4 | 0;
+   $2 = 0;
+   $4 = $2;
+   $2 = $9;
+   $3 = $4 >>> 0 > $2 >>> 0 ? $3 + 1 | 0 : $3;
+   wasm2js_scratch_store_i32(0 | 0, $2 | 0);
+   wasm2js_scratch_store_i32(1 | 0, $3 | 0);
    $5 = Math_fround($6 * +wasm2js_scratch_load_f64());
   }
   return $5;
@@ -989,41 +931,46 @@ function asmFunc(env) {
  function $lib_rt___visit_members($0) {
   var $1 = 0, $2 = 0, $3 = 0;
   folding_inner0 : {
-   switch (HEAP32[($0 - 8 | 0) >> 2] | 0) {
-   case 0:
-    return;
-   case 1:
-    return;
-   case 2:
-    $0 = HEAP32[$0 >> 2];
-    if ($0) {
-     $lib_rt_itcms___visit($0)
-    }
-    return;
-   case 4:
-    $1 = HEAP32[($0 + 4 | 0) >> 2];
-    $3 = $1 + (HEAP32[($0 + 12 | 0) >> 2] << 2 | 0) | 0;
-    while_continue_0 : while (1) {
-     if ($1 >>> 0 < $3 >>> 0) {
-      $2 = HEAP32[$1 >> 2];
-      if ($2) {
-       $lib_rt_itcms___visit($2)
-      }
-      $1 = $1 + 4 | 0;
-      continue while_continue_0;
+   invalid : {
+    switch (HEAP32[($0 - 8 | 0) >> 2] | 0) {
+    case 0:
+     return;
+    case 1:
+     return;
+    case 2:
+     $0 = HEAP32[$0 >> 2];
+     if ($0) {
+      byn_split_outlined_A$_lib_rt_itcms___visit($0)
      }
-     break while_continue_0;
+     return;
+    case 4:
+     $1 = HEAP32[($0 + 4 | 0) >> 2];
+     $3 = $1 + (HEAP32[($0 + 12 | 0) >> 2] << 2 | 0) | 0;
+     while_continue_0 : while (1) {
+      if ($1 >>> 0 < $3 >>> 0) {
+       $2 = HEAP32[$1 >> 2];
+       if ($2) {
+        byn_split_outlined_A$_lib_rt_itcms___visit($2)
+       }
+       $1 = $1 + 4 | 0;
+       continue while_continue_0;
+      }
+      break while_continue_0;
+     };
+     break folding_inner0;
+    case 3:
+    case 5:
+     break folding_inner0;
+    default:
+     break invalid;
     };
-    $lib_rt_itcms___visit(HEAP32[$0 >> 2]);
-    return;
-   default:
-    abort();
-   case 3:
-   case 5:
-    break folding_inner0;
-   };
+   }
+   abort();
   }
-  $lib_rt_itcms___visit(HEAP32[$0 >> 2]);
+  $0 = HEAP32[$0 >> 2];
+  if ($0) {
+   byn_split_outlined_A$_lib_rt_itcms___visit($0)
+  }
  }
  
  function $start() {
@@ -1071,7 +1018,9 @@ function asmFunc(env) {
   HEAP32[$5 >> 2] = $3;
   $1 = $lib_rt_itcms___new(16, $1);
   HEAP32[$1 >> 2] = $3;
-  $lib_rt_itcms___link($1, $3, 0);
+  if ($3) {
+   byn_split_outlined_A$_lib_rt_itcms___link($1, $3, 0)
+  }
   HEAP32[($1 + 4 | 0) >> 2] = $3;
   HEAP32[($1 + 8 | 0) >> 2] = $4;
   HEAP32[($1 + 12 | 0) >> 2] = $0;
@@ -1100,10 +1049,13 @@ function asmFunc(env) {
    $2 = $1 + 1 | 0;
    $lib_array_ensureCapacity($2, 1);
    HEAP32[(HEAP32[1092 >> 2] + ($1 << 2 | 0) | 0) >> 2] = $0;
-   $lib_rt_itcms___link(1088, $0, 1);
+   if ($0) {
+    byn_split_outlined_A$_lib_rt_itcms___link(1088, $0, 1)
+   }
    HEAP32[1100 >> 2] = $2;
-   HEAP32[$lib_memory___stack_pointer >> 2] = 1088;
-   $lib_memory___stack_pointer = $lib_memory___stack_pointer + 4 | 0;
+   $0 = $lib_memory___stack_pointer;
+   HEAP32[$0 >> 2] = 1088;
+   $lib_memory___stack_pointer = $0 + 4 | 0;
    $lib_memory___stack_pointer = $lib_memory___stack_pointer + 4 | 0;
    return HEAP32[1100 >> 2] | 0;
   }
@@ -1161,19 +1113,19 @@ function asmFunc(env) {
      }
      HEAP32[$lib_memory___stack_pointer >> 2] = 0;
      if ($2 >>> 0 >= HEAP32[1100 >> 2] >>> 0) {
-      $lib_builtins_abort(1376 | 0, 1632 | 0, 107 | 0, 42 | 0);
+      $lib_builtins_abort(1376 | 0, 1632 | 0, 114 | 0, 42 | 0);
       abort();
      }
      $3 = HEAP32[(HEAP32[1092 >> 2] + ($2 << 2 | 0) | 0) >> 2];
      HEAP32[$lib_memory___stack_pointer >> 2] = $3;
      if (!$3) {
-      $lib_builtins_abort(2208 | 0, 1632 | 0, 111 | 0, 40 | 0);
+      $lib_builtins_abort(2208 | 0, 1632 | 0, 118 | 0, 40 | 0);
       abort();
      }
      $lib_memory___stack_pointer = $lib_memory___stack_pointer + 4 | 0;
      HEAP32[($lib_memory___stack_pointer + 4 | 0) >> 2] = $3;
      $5 = assembly_human_match_distance($0, $3, Math_fround(2.0));
-     if ($4 > $5) {
+     if ($5 < $4) {
       $1 = $2;
       $4 = $5;
      }
@@ -1183,19 +1135,48 @@ function asmFunc(env) {
     break for_loop_0;
    };
    $4 = $lib_math_NativeMathf_pow($4, Math_fround(.5));
+   $5 = Math_fround(Math_fround(Math_max(Math_fround(0.0), Math_fround(Math_fround(100.0) - $4))) / Math_fround(100.0));
    $2 = $lib_memory___stack_pointer;
    $0 = $lib_rt___newArray(3, 3, 0);
    HEAP32[($2 + 8 | 0) >> 2] = $0;
    HEAP32[($lib_memory___stack_pointer + 12 | 0) >> 2] = HEAP32[($0 + 4 | 0) >> 2];
    HEAPF32[HEAP32[($0 + 4 | 0) >> 2] >> 2] = Math_fround($1 | 0);
    HEAPF32[(HEAP32[($0 + 4 | 0) >> 2] + 4 | 0) >> 2] = $4;
-   HEAPF32[(HEAP32[($0 + 4 | 0) >> 2] + 8 | 0) >> 2] = Math_fround(Math_fround(Math_max(Math_fround(0.0), Math_fround(Math_fround(100.0) - $4))) / Math_fround(100.0));
+   HEAPF32[(HEAP32[($0 + 4 | 0) >> 2] + 8 | 0) >> 2] = $5;
    $lib_memory___stack_pointer = $lib_memory___stack_pointer + 16 | 0;
    $lib_memory___stack_pointer = $lib_memory___stack_pointer + 4 | 0;
    return $0 | 0;
   }
   $lib_builtins_abort(18912 | 0, 18960 | 0, 1 | 0, 1 | 0);
   abort();
+ }
+ 
+ function byn_split_outlined_A$_lib_rt_itcms___visit($0) {
+  $0 = $0 - 20 | 0;
+  if (($lib_rt_itcms_white | 0) == (HEAP32[($0 + 4 | 0) >> 2] & 3 | 0 | 0)) {
+   $lib_rt_itcms_Object_makeGray($0);
+   $lib_rt_itcms_visitCount = $lib_rt_itcms_visitCount + 1 | 0;
+  }
+ }
+ 
+ function byn_split_outlined_A$_lib_rt_itcms___link($0, $1, $2) {
+  var $3 = 0;
+  if (!$0) {
+   $lib_builtins_abort(0 | 0, 1248 | 0, 294 | 0, 14 | 0);
+   abort();
+  }
+  $1 = $1 - 20 | 0;
+  if (($lib_rt_itcms_white | 0) == (HEAP32[($1 + 4 | 0) >> 2] & 3 | 0 | 0)) {
+   $0 = $0 - 20 | 0;
+   $3 = HEAP32[($0 + 4 | 0) >> 2] & 3 | 0;
+   if (($3 | 0) == (!$lib_rt_itcms_white | 0)) {
+    $lib_rt_itcms_Object_makeGray($2 ? $0 : $1)
+   } else {
+    if (($lib_rt_itcms_state | 0) == (1 | 0) & ($3 | 0) == (3 | 0) | 0) {
+     $lib_rt_itcms_Object_makeGray($1)
+    }
+   }
+  }
  }
  
  function _ZN17compiler_builtins3int4udiv10divmod_u6417h6026910b5ed08e40E($0, $1) {

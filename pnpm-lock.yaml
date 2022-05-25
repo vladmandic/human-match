@@ -6,7 +6,7 @@ specifiers:
   '@typescript-eslint/parser': ^5.26.0
   '@vladmandic/pilogger': ^0.4.4
   as-bind: ^0.8.2
-  assemblyscript: ^0.20.6
+  assemblyscript: 0.19.23
   esbuild: ^0.14.39
   eslint: ^8.16.0
   rimraf: ^3.0.2
@@ -17,8 +17,8 @@ dependencies:
   '@typescript-eslint/eslint-plugin': 5.26.0_hzuh7e2up357pvq3mkokjvu2lq
   '@typescript-eslint/parser': 5.26.0_xztl6dhthcahlo6akmb2bmjmle
   '@vladmandic/pilogger': 0.4.4
-  as-bind: 0.8.2_assemblyscript@0.20.6
-  assemblyscript: 0.20.6
+  as-bind: 0.8.2_assemblyscript@0.19.23
+  assemblyscript: 0.19.23
   esbuild: 0.14.39
   eslint: 8.16.0
   rimraf: 3.0.2
@@ -262,30 +262,31 @@ packages:
     engines: {node: '>=8'}
     dev: false
 
-  /as-bind/0.8.2_assemblyscript@0.20.6:
+  /as-bind/0.8.2_assemblyscript@0.19.23:
     resolution: {integrity: sha512-Y7WTopfRLODzLLpTgyrf6TMeEbcckF8u7r/eU68PeiKh7yY/YzmjCQiPAJw0F70bge+84nUO5j4No7V4fzdoew==}
     peerDependencies:
       '@assemblyscript/loader': 0.19.x
       assemblyscript: 0.19.x
     dependencies:
-      assemblyscript: 0.20.6
+      assemblyscript: 0.19.23
       visitor-as: 0.5.0
     dev: false
 
-  /assemblyscript/0.20.6:
-    resolution: {integrity: sha512-gnMhJYoJnVR01EXcYKvty8sPS3Di67gBivKe8HzVcwlvwW3PNlrQ6x7T3o4l24bvamkbKxFLTsmwgX4HtjRw5g==}
+  /assemblyscript/0.19.23:
+    resolution: {integrity: sha512-fwOQNZVTMga5KRsfY80g7cpOl4PsFQczMwHzdtgoqLXaYhkhavufKb0sB0l3T1DUxpAufA0KNhlbpuuhZUwxMA==}
     hasBin: true
     dependencies:
-      binaryen: 106.0.0-nightly.20220320
+      binaryen: 102.0.0-nightly.20211028
       long: 5.2.0
+      source-map-support: 0.5.21
     dev: false
 
   /balanced-match/1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
     dev: false
 
-  /binaryen/106.0.0-nightly.20220320:
-    resolution: {integrity: sha512-9Jzp9aOJ2uk2+viAiPr6+wi1BZKlxO4paTVm481RUEq3PIY63kdw78JoThrROt1s1qpCMuz0Oml6YqPJ7tep4w==}
+  /binaryen/102.0.0-nightly.20211028:
+    resolution: {integrity: sha512-GCJBVB5exbxzzvyt8MGDv/MeUjs6gkXDvf4xOIItRBptYl0Tz5sm1o/uG95YK0L0VeG5ajDu3hRtkBP2kzqC5w==}
     hasBin: true
     dev: false
 
@@ -301,6 +302,10 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       fill-range: 7.0.1
+    dev: false
+
+  /buffer-from/1.1.2:
+    resolution: {integrity: sha512-E+XQCRwSbaaiChtv6k6Dwgc+bx+Bs6vuKJHHl5kox/BaKbhiXzqQOwK4cO22yElGp2OCmjwVhT3HmxgyPGnJfQ==}
     dev: false
 
   /callsites/3.1.0:
@@ -1042,6 +1047,18 @@ packages:
   /slash/3.0.0:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
     engines: {node: '>=8'}
+    dev: false
+
+  /source-map-support/0.5.21:
+    resolution: {integrity: sha512-uBHU3L3czsIyYXKX88fdrGovxdSCoTGDRZ6SYXtSRxLZUzHg5P/66Ht6uoUlHu9EZod+inXhKo3qQgwXUT/y1w==}
+    dependencies:
+      buffer-from: 1.1.2
+      source-map: 0.6.1
+    dev: false
+
+  /source-map/0.6.1:
+    resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==}
+    engines: {node: '>=0.10.0'}
     dev: false
 
   /strip-ansi/6.0.1:
