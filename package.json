@@ -22,7 +22,7 @@
     "@typescript-eslint/parser": "^5.26.0",
     "@vladmandic/pilogger": "^0.4.4",
     "as-bind": "^0.8.2",
-    "assemblyscript": "0.19.23",
+    "assemblyscript": "0.20.18",
     "esbuild": "^0.14.39",
     "eslint": "^8.16.0",
     "rimraf": "^3.0.2",
