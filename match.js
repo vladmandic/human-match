@@ -8,11 +8,11 @@ const wasmFile = 'dist/human-match.wasm'; // use `build.js` to compile `assembly
 const dbFile = 'data/db.json'; // sample face db with 40k records
 const descriptorFile = 'data/descriptor.json'; // just a test descriptor, intentionally truncated to low precision
 const reduceDim = 1; // reduce dimensionality of descriptor
-const multiplyDB = 500; // load db n times to fake huge size
+const multiplyDB = 2000; // load db n times to fake huge size
 let wasm; // holds instance of wasm module
 
 async function init() {
-  const memory = new WebAssembly.Memory({ initial: 1, maximum: 4096, shared: true }); // maximum is number of pages. each page is hard coded to 64kb. this is 256mb or enough for ~80k face records
+  const memory = new WebAssembly.Memory({ initial: 1, maximum: 16384, shared: true }); // maximum is number of pages. each page is hard coded to 64kb. this is 256mb or enough for ~80k face records
   const imports = { env: { memory } };
   wasm = await asbind.instantiate(fs.readFileSync(path.join(__dirname, wasmFile)), imports);
   log.info('wasm:', { file: wasmFile, exports: Object.keys(wasm.typeDescriptor.exportedFunctions) });
@@ -120,12 +120,11 @@ async function main() {
 
   // use pure wasm match loop with wasm similarity math function
   t0 = process.hrtime.bigint();
-  [index, best] = wasm.exports.match(reduce(embedding));
+  [index, best, similarity] = wasm.exports.match(reduce(embedding));
   log.timed(t0, 'match', { type: 'pure wasm  ' }, { index, name: labels[index], similarity: Math.round(1000 * similarity) / 10, distance: best });
 
   // const reshape = desc.reshape([128, 8]); // reshape large 1024-element descriptor to 128 x 8
   // const reduce = reshape.logSumExp(1); // reduce 2nd dimension by calculating logSumExp on it which leaves us with 128-element descriptor
-
 }
 
 main();

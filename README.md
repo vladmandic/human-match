@@ -54,6 +54,22 @@ All implementations are independent of the original library
 
 *asc compile options are inside `build.js`*
 
+this is equivalent to:
+
+    node_modules/.bin/asc assembly/human-match.ts \
+    --outFile dist/human-match.wasm \
+    --textFile dist/human-match.wat \
+    --enable threads,simd \
+    --importMemory \
+    --optimizeLevel 3 \
+    --shrinkLevel 0 \
+    --sharedMemory \
+    --initialMemory 1 \
+    --maximumMemory 16384 \
+    --sourceMap \
+    --exportRuntime \
+    --transform as-bind
+
 <br>
 
 ## Test

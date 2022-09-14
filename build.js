@@ -21,7 +21,7 @@ const options = {
     transform: 'as-bind',
     importMemory: true,
     initialMemory: 1, // 64KB
-    maximumMemory: 64 * 64, // 256MB
+    maximumMemory: 4 * 64 * 64, // 256MB
     sharedMemory: true,
     // importTable: false,
     // exportTable: true,
@@ -57,6 +57,7 @@ async function buildTarget(inputFile, target) {
   compileOptions.jsFile = `${outFile}.js`;
   compileOptions.tsdFile = `${outFile}.d.ts`;
   compileOptions.sourceMap = `${outFile}.map`;
+  // compileOptions.use = 'Math=JSMath';
   // log.data('ASC compile options:', argv(compileOptions));
   await asc.main([srcFile, ...argv(compileOptions)], APIOptions);
   log.data('ASC:', { input: srcFile, output: compileOptions.binaryFile, size: fs.statSync(compileOptions.binaryFile).size });
