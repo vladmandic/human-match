@@ -7,7 +7,7 @@ const options = {
   dbFact: 222, // load db n times to fake huge size
   dbMax: 10000, // maximum number of records to hold in memory
   threadPoolSize: 12,
-  workerSrc: './multithread/worker.js',
+  workerSrc: './src/multithread-worker.js',
   maxJobs: 1000, // exit after processing this many jobs
   debug: false, // verbose messages
   minThreshold: 0.9, // match returns first record that meets the similarity threshold, set to 0 to always scan all records

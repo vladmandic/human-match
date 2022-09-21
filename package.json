@@ -3,9 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vladmandic/human-match.git"
@@ -22,7 +20,7 @@
     "@typescript-eslint/parser": "^5.37.0",
     "@vladmandic/pilogger": "^0.4.6",
     "as-bind": "^0.8.2",
-    "assemblyscript": "0.21.3",
+    "assemblyscript": "0.19.23",
     "esbuild": "^0.15.7",
     "eslint": "^8.23.1",
     "rimraf": "^3.0.2",

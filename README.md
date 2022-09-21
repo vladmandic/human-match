@@ -8,11 +8,103 @@ All implementations are independent of the original library
 
 <br>
 
-## Variations
+## 1. Pure JavaScript solution
 
-- Pure JS solution using match loop and similarity algorithm
-- Hybrid solution using JS match loop and WASM similarity algorithm
-- Pure WASM solution using WASM match loop and WASM similarity algorithm
+Implements native match loop and similarity algorithm as they are implemented in `Human` library
+
+Run demo using `src/js.js`
+
+<br>
+
+## 2. WASM optimized solution
+
+Uses WASM module to run similarity & match methods:
+- Written in AssemblyScript
+- Uses `f32` instead of default `f64`
+- `NativeMathF` stdlib is faster than `MathJS` import lib by 25%, but `MathJS` based solution is smaller  
+- Built using shared memory, could be used instead of building the array inside WASM instance
+- built using multi-threading, instead of having NodeJS worker thread pool, we could have WASM threading  
+- could be further optimized to use `SIMD` 128bit operations instead of `f32` thus reducing similarity loop by 4x
+- WASM source is in `assembly/human-match.ts`
+
+How to build WASM binary:
+
+    node_modules/.bin/asc assembly/human-match.ts \
+    --outFile dist/human-match.wasm \
+    --textFile dist/human-match.wat \
+    --enable threads,simd \
+    --importMemory \
+    --optimizeLevel 3 \
+    --shrinkLevel 0 \
+    --sharedMemory \
+    --initialMemory 1 \
+    --maximumMemory 16384 \
+    --sourceMap \
+    --exportRuntime \
+    --transform as-bind
+
+Run demo using `src/wasm.js`: 
+
+<br>
+
+## 3. NodeJS Multithreaded solution
+
+- just two JS files: `multithread.js` and `multithread-worker.js` :)
+- no external dependencies for main process or worker threads
+- manually created thread pool  
+  can shutdown workers or create additional worker threads on-the-fly
+  safe against workers that exit
+- shared buffer array that holds descriptors  
+- labels are maintained only in main thread  
+- job assigment to workers using round-robin  
+  since timing for each job is near-fixed and predictable  
+- memory consumption of buffer is 8k per descriptor since each descriptor element is a float64  
+  this could be reduced by factor of 32x if necessary:  
+  1. map `f64` element values to `uint8` for *8x* size reduction  
+     this would not result in performance gain as math still has to be `f64`  
+  2. reduced number of elements from *1024* to *256* for *4x* reduction  
+     this would result in equal performance gain when performing matches,  
+     but reduction of descriptor complexity is math heavy to prepare such data
+- thread safe even without atomics or locks:  
+  1. buffer is preallocated  
+  2. only writing to incrementing addresses  
+  3. each write is a single f64 write without structures or serialization  
+  4. workers never access new address space until adding is complete  
+  5. once descriptor is added all workers in a pool are informed of the new record count
+
+### Methods
+
+- `appendRecord`: add additional batch of descriptors to buffer on-the-fly  
+- `getLabel`: fetch label for resolved descriptor index
+- `getDescriptor`: get descriptor array for a given id from a buffer
+- `workersStart`: start or expand worker pool
+- `workersClose`: close workers in a pool (nicely plus terminate)
+- `match`: dispach a match job to a worker
+
+### Performance
+
+Tested with face database of 50k records and 100 match jobs:
+
+> threadPoolSize: 1 => 46,000 ms  
+> threadPoolSize: 6 => 13,327 ms  
+> threadPoolSize:12 => 10,150 ms  
+
+*Note: This is a worse-case scenario where each match job scans entire database*
+*Setting `minThreshold` to even a high value typically improves results by 2-5x*
+
+### Test
+
+`multithread.js` workflow:
+
+1. preallocates buffer
+2. loads small descriptors database repeatedly to create fake large database
+3. creates couple of workers
+4. submits first batch of jobs based on random descriptors pulled from same database
+5. loads additional records
+6. creates additional workers
+7. creates fuzzed descriptors pulled from same database for harder match
+8. submits second batch of jobs
+9. closes workers when all jobs have completed
 
 <br>
 
@@ -31,69 +123,3 @@ All implementations are independent of the original library
 - Descriptor can also be normalized and stored with minimum loss of detail as `uint8` array  
   and reconstructed to `f32` array on load thus resulting in size savings is 4x
 - Combining uint8 and reduced dimensionality would allow processing of db with >10M records in a single pass
-
-### WASM
-
-- Written in AssemblyScript
-- Uses `f32` instead of default `f64`
-- `NativeMathF` stdlib is faster than `MathJS` import lib by 25%, but `MathJS` based solution is smaller  
-- Built using shared memory, could be used instead of building the array inside WASM instance
-- built using multi-threading, instead of having NodeJS worker thread pool, we could have WASM threading  
-- could be further optimized to use `SIMD` 128bit operations instead of `f32` thus reducing similarity loop by 4x
-
-<br>
-
-## Build
-
-> node build.js
-
-```js
-2021-09-30 08:17:54 INFO:  AssemblyScript version 0.19.16
-2021-09-30 08:18:00 DATA:  ASC: { input: 'assembly/human-match.ts', output: 'dist/human-match.wasm', size: 8431 }
-```
-
-*asc compile options are inside `build.js`*
-
-this is equivalent to:
-
-    node_modules/.bin/asc assembly/human-match.ts \
-    --outFile dist/human-match.wasm \
-    --textFile dist/human-match.wat \
-    --enable threads,simd \
-    --importMemory \
-    --optimizeLevel 3 \
-    --shrinkLevel 0 \
-    --sharedMemory \
-    --initialMemory 1 \
-    --maximumMemory 16384 \
-    --sourceMap \
-    --exportRuntime \
-    --transform as-bind
-
-<br>
-
-## Test
-
-> node match.js
-
-```js
-2021-09-30 14:49:47 INFO:  wasm: { file: 'dist/human-match.wasm', exports: [ 'features', 'register', 'reset', 'distance', 'match' ] }
-2021-09-30 14:49:47 INFO:  wasm features: { target: '32bit', optimize: 3, shrink: 0, simd: true, shmem: true, threads: true }
-2021-09-30 14:49:48 TIMED: 1,461 ms db load: { records: 22500 }
-2021-09-30 14:49:49 TIMED: 308 ms db unpack: { records: 22500, bytes: 134217728, reduce: 1, descriptor: 1024 }
-2021-09-30 14:49:49 TIMED: 66 ms match { type: 'javascript ' } { index: 11, name: 'ai', similarity: 99.2, distance: 0.7729938550855369 }
-2021-09-30 14:49:49 TIMED: 594 ms match { type: 'hybrid wasm' } { index: 11, name: 'ai', similarity: 99.2, distance: 0.7729937118284379 }
-2021-09-30 14:49:49 TIMED: 145 ms match { type: 'pure wasm  ' } { index: 11, name: 'ai', similarity: 99.2, distance: 0.7729936838150024 }
-```
-
-> reference implementation in `human`
-
-```js
-2021-09-30 08:16:13 TIMED: 686 ms match { type: 'original   ' } { name: 'ai', similarity: 99.2, distance: 0.7729938550855369 }
-```
-
-## Conclusions
-
-- round-trip to WASM instance and back is a killer, so hybrid option is a no-go.
-- Updated JS implementation is 10x faster than original one
-- Updated JS is faster than WASM showing how much optimizations is present in JS engine
